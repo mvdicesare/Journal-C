@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  MVDEntryTableViewController.h
 //  JournalOBJ-C
 //
 //  Created by Michael Di Cesare on 10/7/19.
@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+NS_ASSUME_NONNULL_BEGIN
 
+@interface MVDEntryTableViewController : UITableViewController
 
 @end
 
+NS_ASSUME_NONNULL_END
