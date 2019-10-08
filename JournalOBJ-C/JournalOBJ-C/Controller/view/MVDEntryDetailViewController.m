@@ -45,6 +45,7 @@
                            self.entry = entry;
     }
                            [self.navigationController popViewControllerAnimated:true];
+                        [[MVDEntryController sharedController] saveToPersistentStorage];
 }
 
 - (IBAction)clearButtonPressed:(id)sender

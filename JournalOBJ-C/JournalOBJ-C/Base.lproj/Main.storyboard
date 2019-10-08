@@ -110,7 +110,11 @@
                         <viewLayoutGuide key="safeArea" id="8M0-OR-Jgb"/>
                     </view>
                     <navigationItem key="navigationItem" title="Journal Entry" id="5yl-4j-22g">
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="save" id="kr2-RK-9cZ"/>
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="save" id="kr2-RK-9cZ">
+                            <connections>
+                                <action selector="savedButtonPressed:" destination="NaG-0C-cOB" id="nLc-hK-YgS"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="entryBodyTextField" destination="lhs-Uj-SBm" id="HQS-cw-c0j"/>

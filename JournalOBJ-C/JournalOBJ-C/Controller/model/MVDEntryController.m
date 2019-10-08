@@ -79,7 +79,6 @@ static NSString * const entry = @"entries";
 
 
 
-
 //import Foundation
 //class EntryController {
 //
