@@ -8,13 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-NS_ASSUME_NONNULL_BEGIN
 
 @interface MVDEntry : NSObject
 
 @property (nonatomic, copy) NSString * title;
 @property (nonatomic, copy) NSString * bodyText;
-@property (nonatomic, copy, readonly) NSDate * timestamp;
+@property (nonatomic, copy) NSDate * timestamp;
 
 -(instancetype)initWithDictionary:(NSDictionary *)dictionary;
 -(NSDictionary*)dictionaryWithEntry;
@@ -24,4 +23,4 @@ NS_ASSUME_NONNULL_BEGIN
                          timestamp:(NSDate *) timestamp;
 
 @end
-NS_ASSUME_NONNULL_END
+

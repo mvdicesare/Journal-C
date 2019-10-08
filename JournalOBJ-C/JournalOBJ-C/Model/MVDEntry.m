@@ -17,7 +17,7 @@ static NSString * const timestampEntry = @"timestamp";
 
 @implementation MVDEntry
 
-- (instancetype)initWithTitle:(NSString *)title bodyText:(NSString *)bodyText timestamp:(NSDate *)timestamp
+- (instancetype)initWithEntryTitle:(NSString *)title bodytest:(NSString *)bodyText timestamp:(NSDate *)timestamp
 {
     self = [super init];
     if (self)
@@ -31,10 +31,10 @@ static NSString * const timestampEntry = @"timestamp";
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary
 {
-    NSString *title = dictionary[title];
-    NSString *bodyText = dictionary[bodyText];
-    NSDate *timestamp = dictionary[timestamp];
-    return [self initWithTitle:title bodyText:bodyText timestamp:timestamp];
+    NSString *title = dictionary[titleEntry];
+    NSString *bodyText = dictionary[bodyTextEntry];
+    NSDate *timestamp = dictionary[timestampEntry];
+    return [self initWithEntryTitle:title bodytest:bodyText timestamp:timestamp];
 }
 - (NSDictionary *)dictionaryWithEntry
 {

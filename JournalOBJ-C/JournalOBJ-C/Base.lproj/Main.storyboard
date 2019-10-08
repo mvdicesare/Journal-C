@@ -16,15 +16,31 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="RlB-Uw-qVk">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="entryTitleCell" textLabel="G9h-hs-CXG" detailTextLabel="hnP-Ql-dCJ" style="IBUITableViewCellStyleValue1" id="RlB-Uw-qVk">
                                 <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="RlB-Uw-qVk" id="gtL-Zx-E9R">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="G9h-hs-CXG">
+                                            <rect key="frame" x="20" y="12" width="33.5" height="20.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hnP-Ql-dCJ">
+                                            <rect key="frame" x="350" y="12" width="44" height="20.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="NaG-0C-cOB" kind="show" id="zED-Os-5AT"/>
+                                    <segue destination="NaG-0C-cOB" kind="show" identifier="toDetailVIew " id="zED-Os-5AT"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -69,6 +85,10 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sJR-gV-kRA">
                                 <rect key="frame" x="136" y="774" width="142" height="30"/>
                                 <state key="normal" title="Clear Button"/>
+                                <connections>
+                                    <action selector="clearButtonPressed:" destination="NaG-0C-cOB" eventType="touchUpInside" id="00f-vp-oB4"/>
+                                    <action selector="savedButtonPressed:" destination="NaG-0C-cOB" eventType="touchUpInside" id="DKi-AW-Tlo"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -92,6 +112,10 @@
                     <navigationItem key="navigationItem" title="Journal Entry" id="5yl-4j-22g">
                         <barButtonItem key="rightBarButtonItem" style="plain" systemItem="save" id="kr2-RK-9cZ"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="entryBodyTextField" destination="lhs-Uj-SBm" id="HQS-cw-c0j"/>
+                        <outlet property="entryTitleField" destination="tec-Mm-l4n" id="bHi-lT-iT6"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Af-y8-pfC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

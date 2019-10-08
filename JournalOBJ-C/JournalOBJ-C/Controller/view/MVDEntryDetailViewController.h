@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "MVDEntryController.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface MVDEntryDetailViewController : UIViewController
+
+@property (nonatomic, strong) MVDEntry *entry;
 
 @end
 

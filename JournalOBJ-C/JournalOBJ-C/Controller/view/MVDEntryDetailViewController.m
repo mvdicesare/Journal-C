@@ -7,26 +7,71 @@
 //
 
 #import "MVDEntryDetailViewController.h"
+#import "MVDEntryController.h"
 
 @interface MVDEntryDetailViewController ()
+
+@property (weak, nonatomic) IBOutlet UITextField *entryTitleField;
+@property (weak, nonatomic) IBOutlet UITextView *entryBodyTextField;
 
 @end
 
 @implementation MVDEntryDetailViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    [self updateViews];
+}
+- (void)updateViews
+{
+    if (!self.entry) return;
+    self.entryTitleField.text = self.entry.title;
+    self.entryBodyTextField.text = self.entry.bodyText;
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (IBAction)savedButtonPressed:(id)sender
+{
+    if (self.entry)
+    {
+        self.entry.title = self.entryTitleField.text;
+        self.entry.bodyText = self.entryBodyTextField.text;
+        self.entry.timestamp = [NSDate date];
+    }
+    else
+    {
+        MVDEntry *entry = [[MVDEntry alloc] initWithEntryTitle:self.entryTitleField.text bodytest:self.entryBodyTextField.text timestamp:NSDate.date];
+        [[MVDEntryController sharedController] addEntryAt:entry];
+                           self.entry = entry;
+    }
+                           [self.navigationController popViewControllerAnimated:true];
 }
-*/
+
+- (IBAction)clearButtonPressed:(id)sender
+{
+    self.entryTitleField.text = @"";
+    self.entryBodyTextField.text = @"";
+}
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
+
+- (void)setEntry:(MVDEntry *)entry
+{
+    if (entry != _entry)
+    {
+        _entry = entry;
+        [self updateViews];
+    }
+}
+
+
+
+
+
+
+
 
 @end

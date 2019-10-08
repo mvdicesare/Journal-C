@@ -8,39 +8,41 @@
 
 #import "MVDEntryTableViewController.h"
 #import "MVDEntryDetailViewController.h"
+#import "MVDEntryController.h"
 
-@interface MVDEntryTableViewController () 
-
-
-
+@interface MVDEntryTableViewController ()
 @end
 
 @implementation MVDEntryTableViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self.tableView reloadData];
 }
+
 
 #pragma mark - Table view data source
 
 
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
-    return 0;
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [[[MVDEntryController sharedController] entries] count];
 }
 
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"entryTitleCell" forIndexPath:indexPath];
     
-    // Configure the cell...
+    MVDEntryController *entryCotroller = [MVDEntryController sharedController];
+    MVDEntry *entry = entryCotroller.entries[indexPath.row];
+   
+    // need to fix date formater***************************
+    
+    cell.textLabel.text = entry.title;
+    cell.detailTextLabel.text = entry.bodyText;
     
     return cell;
 }
@@ -51,10 +53,16 @@
 
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"toDetailVIew"])
+    {
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+        MVDEntry *entry = [MVDEntryController sharedController].entries[indexPath.row];
+        MVDEntryDetailViewController *detailViewController = segue.destinationViewController;
+        detailViewController.entry = entry;
+    }
 }
 
 

@@ -18,11 +18,12 @@ static NSString * const entry = @"entries";
 
 @implementation MVDEntryController
 // singleton
-+(MVDEntryController *)sharedInstance {
++(MVDEntryController *)sharedController {
     static MVDEntryController *sharedInstance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         sharedInstance = [MVDEntryController new];
+        [sharedInstance loadFromPersistentStorage];
     });
     return sharedInstance;
 }
