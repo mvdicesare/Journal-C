@@ -7,8 +7,11 @@
 //
 
 #import "MVDEntryTableViewController.h"
+#import "MVDEntryDetailViewController.h"
 
-@interface MVDEntryTableViewController ()
+@interface MVDEntryTableViewController () 
+
+
 
 @end
 

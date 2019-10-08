@@ -9,8 +9,10 @@
 #import "MVDEntryController.h"
 //creates a mutable array
 static NSString * const entry = @"entries";
+
 @interface MVDEntryController ()
-@property (nonatomic, strong) NSMutableArray<MVDEntry *> * entries;
+@property (nonatomic, strong) NSMutableArray<MVDEntry *> * entriesMA;
+
 @end
 
 
@@ -24,30 +26,53 @@ static NSString * const entry = @"entries";
     });
     return sharedInstance;
 }
-
-// add
--(void)addEntry:(NSString *)title bodyText:(NSString *)bodyText timestamp:(NSDate *)timestamp
+- (instancetype)init
 {
-    // let newEntry: MVDEntry = MVDEntry(title: title, bodytext: bodytext, timestamp: timestamp)
-    MVDEntry * newEntry = [[MVDEntry alloc] initWithEntryTitle:title bodytest:bodyText timestamp:timestamp];
-    
-    // internalEntries.append(newEntry)
-    [_entries addObject:newEntry];
+    self = [super init];
+    if (self)
+    {
+        _entriesMA = [NSMutableArray array];
+    }
+    return self;
+}
+
+
+- (NSArray*)entries {return self.entriesMA;}
+// add
+
+-(void)addEntryAt:(MVDEntry *)entry
+{
+    [self.entriesMA addObject:entry];
 }
 // remove 
--(void)removeEntry:(id)index
+-(void)removeObjectAt:(MVDEntry *)entry
 {
-    NSInteger count = [_entries count];
-    for (NSInteger index = (count - 1); index >=0; index--)
-    {
-        [_entries removeObjectAtIndex:index];
-    }
+        [self.entriesMA removeObject:entry];
 }
+
 
 // save
 
+- (void)saveToPersistentStorage
+{
+    NSMutableArray *entryDict = [NSMutableArray array];
+    
+    for (MVDEntry *entry in self.entries)
+    {
+        [entryDict addObject:entry.dictionaryWithEntry];
+    }
+    [[NSUserDefaults standardUserDefaults] setObject:entryDict forKey:entry];
+}
 
-
+-(void)loadFromPersistentStorage
+{
+    NSArray *entryDict = [[NSUserDefaults standardUserDefaults] objectForKey:entry];
+    for (NSDictionary *dictionaty in entryDict)
+    {
+        MVDEntry *entry = [[MVDEntry alloc] initWithDictionary:dictionaty];
+        [self addEntryAt:entry];
+    }
+}
 
 @end
 

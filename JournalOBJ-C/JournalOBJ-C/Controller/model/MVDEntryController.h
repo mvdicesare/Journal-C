@@ -15,11 +15,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 +(MVDEntryController *)sharedController;
 
--(void)addEntry:(NSString *)title
-       bodyText:(NSString *)bodyText
-      timestamp:(NSDate *)timestamp;
+- (void)saveToPersistentStorage;
 
--(void)removeObjectAt:(Entry *)index;
+@property (nonatomic,strong, readonly) NSArray *entries;
+-(void)addEntryAt:(MVDEntry *)entry;
+-(void)removeObjectAt:(MVDEntry *)entry;
 
 
 @end

@@ -9,17 +9,17 @@
 #import "MVDEntry.h"
 
 
-static NSString * const title = @"title";
-static NSString * const bodyText = @"bodyText";
-static NSString * const timestamp = @"timestamp";
+static NSString * const titleEntry = @"title";
+static NSString * const bodyTextEntry = @"bodyText";
+static NSString * const timestampEntry = @"timestamp";
 
 
 
 @implementation MVDEntry
 
-- (id)initWithTitle:(NSString *)title bodyText:(NSString *)bodyText timestamp:(NSDate *)timestamp
+- (instancetype)initWithTitle:(NSString *)title bodyText:(NSString *)bodyText timestamp:(NSDate *)timestamp
 {
-    self = [Super init];
+    self = [super init];
     if (self)
     {
         _title = title;
@@ -29,11 +29,23 @@ static NSString * const timestamp = @"timestamp";
     return self;
 }
 
-- (instancetype)initWithDictionary:(NSDictonary *)dictionary
+- (instancetype)initWithDictionary:(NSDictionary *)dictionary
 {
     NSString *title = dictionary[title];
     NSString *bodyText = dictionary[bodyText];
-    NSDate *timestamp = timestamp;
-    return [self initWithTitle:title text:text timestamp:timestamp];
+    NSDate *timestamp = dictionary[timestamp];
+    return [self initWithTitle:title bodyText:bodyText timestamp:timestamp];
+}
+- (NSDictionary *)dictionaryWithEntry
+{
+    return @{titleEntry: self.title,
+             bodyTextEntry: self.bodyText,
+             timestampEntry: self.timestamp};
+}
+
+- (BOOL)isEqual:(id)object
+{
+    if (![object isKindOfClass:[MVDEntry class]]) {return NO;}
+    return [[self dictionaryWithEntry] isEqualToDictionary:[(MVDEntry *) object dictionaryWithEntry]];
 }
 @end
